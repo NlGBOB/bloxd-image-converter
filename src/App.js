@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect, useCallback } from 'react';
 import './App.css';
 
@@ -13,14 +14,13 @@ const defaultConfig = {
   TEXTURE_SIZE: 8,
 };
 
+// Setup code defines S (Scheduler) and B (Block Palette)
 const SETUP_CODE = `S={t:{},g:{},c:0,o:0,i:0,d:{get 1(){let t=S.t[S.c];do{let e=3*S.i,l=t[e+1],o=t[e+2],i=S.g[l];[t[e],t=>t][+(o<i)]()}while(++S.i<t.length/3)}},run(t,e,l){let o=S.c-~e-1,i=S.t[o]=[[],S.t[o]][+!!S.t[o]];i[i.length]=t,i[i.length]=["0",l][+!!l],i[i.length]=S.o++},stop(t){S.g[t]=S.o++}},tick=()=>{S.d[+!!S.t[S.c]],delete S.t[S.c++],S.i=0},S.run((()=>{globalThis.B={};let t=[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,145,146,147,164,165,166,167,168,169,170,171,172,203,204,205,206,207,208,209,210,211,212,213,214,223,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,317,318,319,320,321,322,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,504,650,651,652,653,654,906,907,908,909,910,911,937,938,945,946,947,948,949,950,951,958,959,960,961,962,975,976,977,978,979,980,981,982,983,990,991,992,993,994,995,996,997,998,999,1e3,1001,1002,1003,1004,1005,1006,1007,1056,1057,1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1085,1086,1087,1088,1089,1090,1091,1108,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1221,1222,1223,1224,1225,1226,1258,1259,1270,1271,1272,1279,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326,1327,1328,1329,1330,1331,1332,1333,1334,1335,1336,1337,1338,1339,1340,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1351,1352,1353,1354,1355,1356,1357,1358,1359,1360,1494,1510,1511,1512,1513,1514,1515,1516,1517,1518,1519,1520,1521,1522,1523,1524,1525,1526,1527,1528,1529,1530,1531,1532,1533,1534,1535,1536,1537,1538,1539,1540,1541,1542,1543,1544,1545,1546,1547,1548,1549,1550,1551,1552,1553,1554,1555,1556,1557,1558,1559,1560,1561,1562,1563,1564,1565,1566,1567,1568,1569,1570,1571,1572,1573,1574,1575,1576,1577,1578,1579,1580,1581,1582,1583,1584,1585,1586,1587,1588,1589,1590,1591,1592,1593,1594,1595,1596,1597,1598,1599,1600,1601,1602,1603,1604,1605,1606,1607,1608,1609,1610,1611,1612,1613,1614,1615,1616,1617,1618,1619,1620,1621,1628,1629,1630,1632,1633,1634,1635,1636,1662,1663,1694,1704,1705,1706,1707,1708,1717,1722,1723,1724,1725,1726,1727,1728,1729,1730,1731,1732,1733,1734,1735,1736,1737,1738,1739,1740,1741,1742,1743,1744,1745,1746,1747,1748,1749,1750,1751,1752,1753,1754,1955,1965,1966,1967,1968,1969,1995,1996,2007,2008,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2045,2046,2085,2086,2088,2089,2090,2091,2092,2093,2095,2097,2507,2508,2509,2510,2511,2512];let S=0;do{B[b=t[S++]]=api.blockIdToBlockName(b)}while(t[S])}));`;
 
 const sliderToValue = (val) => (val >= 11 ? null : val);
 const valueToSlider = (val) => (val === null || val === Infinity ? 11 : val);
 
 const ORIENTATION_CONFIG = {
-  // --- WALLS (Uses Side/Front Textures) ---
-  // Builds from Left to Right relative to the player facing the wall.
   wall_north: {
     face: "front",
     desc: "Vertical Wall. You face North (-Z). Builds to your RIGHT (West/-X)."
@@ -37,10 +37,6 @@ const ORIENTATION_CONFIG = {
     face: "front",
     desc: "Vertical Wall. You face West (-X). Builds to your RIGHT (South/+Z)."
   },
-
-  // --- FLOORS (Uses Top Textures) ---
-  // Code block = Bottom-Left corner of image.
-  // Image builds FORWARD (away from player) and RIGHT.
   floor_north: {
     face: "top",
     desc: "Horizontal Floor. You face North (-Z). Image builds FORWARD (-Z) and RIGHT (-X)."
@@ -57,10 +53,6 @@ const ORIENTATION_CONFIG = {
     face: "top",
     desc: "Horizontal Floor. You face West (-X). Image builds FORWARD (-X) and RIGHT (+Z)."
   },
-
-  // --- CEILINGS (Uses Bottom Textures) ---
-  // CEILINGS are MIRRORED horizontally compared to floors because you look up at them.
-  // Instead of building to the RIGHT, they build to the LEFT to appear correct from below.
   ceiling_north: {
     face: "bottom",
     desc: "Horizontal Ceiling. You face North (-Z). Image builds FORWARD (-Z) and LEFT (+X) (Mirrored for look-up)."
@@ -115,7 +107,6 @@ function App() {
   const [blueprint, setBlueprint] = useState(null);
   const [isDraggingFile, setIsDraggingFile] = useState(false);
   const [comparePosition, setComparePosition] = useState(100);
-
   const [config, setConfig] = useState(defaultConfig);
   const workerRef = useRef(null);
 
@@ -170,15 +161,28 @@ function App() {
       } else if (name === 'maxColorCount') {
         const sliderVal = parseInt(value, 10);
         const actualVal = sliderToValue(sliderVal);
-
         newConfig.maxColorCount = actualVal;
-        newConfig.searchDepth = actualVal === null ? Infinity : actualVal;
+
+        // Constraint: Depth cannot exceed Max Colors
+        if (actualVal !== null) {
+          if (newConfig.searchDepth === null || newConfig.searchDepth > actualVal) {
+            newConfig.searchDepth = actualVal;
+          }
+        }
 
       } else if (name === 'searchDepth') {
         const sliderVal = parseInt(value, 10);
-        newConfig.searchDepth = sliderVal >= 11 ? Infinity : sliderVal;
+        let actualVal = sliderToValue(sliderVal);
+
+        // Constraint: Depth cannot exceed Max Colors
+        if (newConfig.maxColorCount !== null) {
+          if (actualVal === null || actualVal > newConfig.maxColorCount) {
+            actualVal = newConfig.maxColorCount;
+          }
+        }
+        newConfig.searchDepth = actualVal;
+
       } else if (name === 'buildOrientation') {
-        // Automatically set the faceDirection based on orientation
         newConfig.buildOrientation = value;
         newConfig.faceDirection = ORIENTATION_CONFIG[value].face;
       } else if (type === 'number' || type === 'range') {
@@ -256,102 +260,100 @@ function App() {
   const handleReset = () => { setConfig(defaultConfig); }
 
   const getDynamicCode = () => {
-    if (!blueprint) return '';
+    if (!blueprint) return [];
     const { width, height } = JSON.parse(blueprint.config);
-
-    // Coordinate Logic based on verified Build Orientation rule:
-    // Face +X (East) => Right is -Z (North)
-    //
-    // i = index, w = width, h = height
-    // u = i % w (column index / Distance Right)
-    // v = (i / w)|0 (row index / Distance Down)
-    // off = h - 1 - v (Distance Up / Forward from Code Block)
 
     let coordLogic = "";
 
     switch (config.buildOrientation) {
-      // --- Vertical Walls ---
-      // u moves along the "Right" vector.
-      // v moves along the Y axis (Up).
-
-      case "wall_north": // Face -Z
-        // Right is -X (West)
+      case "wall_north":
         coordLogic = "x-(i%w),y+h-((i/w)|0),z";
         break;
-
-      case "wall_south": // Face +Z
-        // Right is +X (East)
+      case "wall_south":
         coordLogic = "x+(i%w),y+h-((i/w)|0),z";
         break;
-
-      case "wall_east": // Face +X
-        // Right is -Z (North)
+      case "wall_east":
         coordLogic = "x,y+h-((i/w)|0),z-(i%w)";
         break;
-
-      case "wall_west": // Face -X
-        // Right is +Z (South)
+      case "wall_west":
         coordLogic = "x,y+h-((i/w)|0),z+(i%w)";
         break;
-
-      // --- Horizontal Floors ---
-      // Image builds "Forward" (off) and "Right" (u).
-
-      case "floor_north": // Face -Z
-        // Fwd: -Z, Right: -X
+      case "floor_north":
         coordLogic = "x-(i%w),y+1,z-(h-1-((i/w)|0))";
         break;
-
-      case "floor_south": // Face +Z
-        // Fwd: +Z, Right: +X
+      case "floor_south":
         coordLogic = "x+(i%w),y+1,z+(h-1-((i/w)|0))";
         break;
-
-      case "floor_east": // Face +X
-        // Fwd: +X, Right: -Z
+      case "floor_east":
         coordLogic = "x+(h-1-((i/w)|0)),y+1,z-(i%w)";
         break;
-
-      case "floor_west": // Face -X
-        // Fwd: -X, Right: +Z
+      case "floor_west":
         coordLogic = "x-(h-1-((i/w)|0)),y+1,z+(i%w)";
         break;
-
-      // --- Horizontal Ceilings ---
-      // Builds "Forward" (off) and "Left" (u reversed) to account for looking up.
-
-      case "ceiling_north": // Face -Z
-        // Fwd: -Z, Left: +X (Mirror of Right -X)
+      case "ceiling_north":
         coordLogic = "x+(i%w),y+1,z-(h-1-((i/w)|0))";
         break;
-
-      case "ceiling_south": // Face +Z
-        // Fwd: +Z, Left: -X (Mirror of Right +X)
+      case "ceiling_south":
         coordLogic = "x-(i%w),y+1,z+(h-1-((i/w)|0))";
         break;
-
-      case "ceiling_east": // Face +X
-        // Fwd: +X, Left: +Z (Mirror of Right -Z)
+      case "ceiling_east":
         coordLogic = "x+(h-1-((i/w)|0)),y+1,z+(i%w)";
         break;
-
-      case "ceiling_west": // Face -X
-        // Fwd: -X, Left: -Z (Mirror of Right +Z)
+      case "ceiling_west":
         coordLogic = "x-(h-1-((i/w)|0)),y+1,z-(i%w)";
         break;
-
       default:
         coordLogic = "x-(i%w),y+h-((i/w)|0),z";
     }
 
-    const arrayString = `[${blueprint.data.join(',')}]`;
+    const MAX_CHARS = 15000;
+    const OVERHEAD = 250;
+    const parts = [];
 
-    return `let s=${arrayString},w=${width},h=${height},[x,y,z]=thisPos;S.stop(t='p'),(f=i=>{c=128;do(k=s[i])&&api.setBlock(${coordLogic},B[k]);while(s[++i]&&--c);s[i]&&S.run(()=>f(i),1,t)})(0)`;
+    let currentChunk = [];
+    let currentLen = 0;
+    let currentOffset = 0;
+
+    for (let i = 0; i < blueprint.data.length; i++) {
+      const numStr = blueprint.data[i].toString();
+      if (currentLen + numStr.length + 1 > MAX_CHARS - OVERHEAD) {
+        const chunkStr = currentChunk.join(',');
+        const code = `let s=[${chunkStr}],w=${width},h=${height},o=${currentOffset},[x,y,z]=thisPos;(f=_=>{let c=128,i;do{if(_>=s.length)return;i=o+_;api.setBlock(${coordLogic},B[s[]]);_++}while(--c);S.run(()=>f(_),1,'b'+o)})(0)`;
+
+        parts.push({
+          label: `2.${parts.length + 1} Build Part ${parts.length + 1}`,
+          code: code
+        });
+
+        // Reset for next chunk
+        currentOffset += currentChunk.length;
+        currentChunk = [];
+        currentLen = 0;
+      }
+      currentChunk.push(numStr);
+      currentLen += numStr.length + 1;
+    }
+
+    // Add remaining chunk
+    if (currentChunk.length > 0) {
+      const chunkStr = currentChunk.join(',');
+      const code = `let s=[${chunkStr}],w=${width},h=${height},o=${currentOffset},[x,y,z]=thisPos;(f=_=>{let c=128,i;do{if(_>=s.length)return;i=o+_;api.setBlock(${coordLogic},B[s[_]]);_++}while(--c);S.run(()=>f(_),1,'b'+o)})(0)`;
+
+      parts.push({
+        label: parts.length > 0 ? `2.${parts.length + 1} Build Part ${parts.length + 1} (Final)` : `2. Build Command`,
+        code: code
+      });
+    }
+
+    return parts;
   };
 
   const widthPresets = [32, 64, 96, 128, 160];
   const maxColorSliderVal = valueToSlider(config.maxColorCount);
   const searchDepthSliderVal = valueToSlider(config.searchDepth);
+
+  // Calculate max allowed value for the depth slider
+  const maxDepthAllowed = config.maxColorCount === null ? 11 : config.maxColorCount;
 
   return (
     <div className="App">
@@ -361,7 +363,6 @@ function App() {
       </header>
       <main>
         <div className="controls">
-
           <div className="control-section">
             <h2>1. Source Image</h2>
             <div
@@ -489,7 +490,7 @@ function App() {
                 id="searchDepth"
                 name="searchDepth"
                 min="1"
-                max="11"
+                max={maxDepthAllowed}
                 step="1"
                 value={searchDepthSliderVal}
                 onChange={handleConfigChange}
@@ -529,11 +530,9 @@ function App() {
               {image && resultImage && !processing && (
                 <div className="compare-container" style={{ '--pos': comparePosition }}>
                   <img src={resultImage} alt="Generated" className="img-base" />
-
                   <div className="img-overlay">
                     <img src={image} alt="Original" />
                   </div>
-
                   <input
                     type="range"
                     min="0"
@@ -542,13 +541,11 @@ function App() {
                     onChange={(e) => setComparePosition(e.target.value)}
                     className="compare-slider"
                   />
-
                   <div className="slider-line">
                     <div className="slider-button">
                       <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><path d="M15 18l-6-6 6-6" /><path d="M9 18l6-6-6-6" /></svg>
                     </div>
                   </div>
-
                   <div className="compare-label label-left" style={{ opacity: comparePosition > 10 ? 1 : 0 }}>Original</div>
                   <div className="compare-label label-right" style={{ opacity: comparePosition < 90 ? 1 : 0 }}>Generated</div>
                 </div>
@@ -575,10 +572,13 @@ function App() {
                     code={SETUP_CODE}
                   />
 
-                  <CodeSnippet
-                    label="2. Build Command (Run to build this image)"
-                    code={getDynamicCode()}
-                  />
+                  {getDynamicCode().map((item, idx) => (
+                    <CodeSnippet
+                      key={idx}
+                      label={item.label}
+                      code={item.code}
+                    />
+                  ))}
                 </div>
 
                 <div className="actions-footer">
