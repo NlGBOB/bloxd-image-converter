@@ -6,7 +6,6 @@ const ConfigurationPanel = ({ config, onConfigChange, onReset }) => {
     const maxColorSliderVal = valueToSlider(config.maxColorCount);
     const searchDepthSliderVal = valueToSlider(config.searchDepth);
 
-    // Calculate max allowed value for the depth slider
     const maxDepthAllowed = config.maxColorCount === null ? 11 : config.maxColorCount;
 
     return (

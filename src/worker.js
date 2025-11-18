@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 self.onmessage = async (event) => {
     const { fileBuffer, config } = event.data;
     try {

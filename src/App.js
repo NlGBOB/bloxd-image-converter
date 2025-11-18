@@ -1,10 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import './App.css';
 
-// Constants
 import { defaultConfig, sliderToValue, ORIENTATION_CONFIG } from './constants';
 
-// Components
 import Header from './components/Header';
 import ImageUploader from './components/ImageUploader';
 import ConfigurationPanel from './components/ConfigurationPanel';
@@ -48,7 +46,6 @@ function App() {
         const actualVal = sliderToValue(sliderVal);
         newConfig.maxColorCount = actualVal;
 
-        // Constraint: Depth cannot exceed Max Colors
         if (actualVal !== null) {
           if (newConfig.searchDepth === null || newConfig.searchDepth > actualVal) {
             newConfig.searchDepth = actualVal;
@@ -59,7 +56,6 @@ function App() {
         const sliderVal = parseInt(value, 10);
         let actualVal = sliderToValue(sliderVal);
 
-        // Constraint: Depth cannot exceed Max Colors
         if (newConfig.maxColorCount !== null) {
           if (actualVal === null || actualVal > newConfig.maxColorCount) {
             actualVal = newConfig.maxColorCount;

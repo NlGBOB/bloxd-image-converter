@@ -69,7 +69,6 @@ const CodeViewer = ({ blueprint, config }) => {
                     code: code
                 });
 
-                // Reset for next chunk
                 currentOffset += currentChunk.length;
                 currentChunk = [];
                 currentLen = 0;
@@ -78,7 +77,6 @@ const CodeViewer = ({ blueprint, config }) => {
             currentLen += numStr.length + 1;
         }
 
-        // Add remaining chunk
         if (currentChunk.length > 0) {
             const chunkStr = currentChunk.join(',');
             const code = `let s=[${chunkStr}],w=${width},h=${height},o=${currentOffset},[x,y,z]=thisPos;(f=_=>{let c=128,i;do{if(_>=s.length)return;i=o+_;api.setBlock(${coordLogic},B[s[_]]);_++}while(--c);S.run(()=>f(_),1,'b'+o)})(0)`;
