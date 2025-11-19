@@ -94,11 +94,11 @@ const CodeViewer = ({ blueprint, config }) => {
         <div className="code-section">
             <div className="code-section-header">
                 <h3>Game Code</h3>
-                <p>Copy these snippets into your game console to build the image.</p>
+                <p>Copy these snippets into a code block, and run the codes one by one to build the image.</p>
             </div>
 
             <CodeSnippet
-                label="1. One-Time Setup (Run once per world)"
+                label="1. One-Time Setup (Replace your world code with this)"
                 code={SETUP_CODE}
             />
 
