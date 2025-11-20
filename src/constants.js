@@ -15,7 +15,7 @@ export const BLOCK_IDS = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
 
 export const CHARSET = "!#%&'()*+,-./:;<=>?[]^_{|}~";
 
-const BTS_CODE = `S={t:{},g:{},c:0,o:0,i:0,d:{get 1(){let t=S.t[S.c];do{let e=3*S.i,l=t[e+1],g=t[e+2],c=S.g[l];[t[e],S=>S][+(g<c)]()}while(++S.i<t.length/3)}},run(t,e,l){let g=S.c-~e-1,c=S.t[g]=[[],S.t[g]][+!!S.t[g]];c[c.length]=t,c[c.length]=["0",l][+!!l],c[c.length]=S.o++},stop(t){S.g[t]=S.o++}},tick=()=>{S.d[+!!S.t[S.c]],delete S.t[S.c++],S.i=0}`;
+const BTS_CODE = `S={t:{},g:{},c:0,o:0,i:0,d:{get false(){let t=S.t[S.c];do{let e=3*S.i;[t[e],S=>S][+(t[e+2]<S.g[t[e+1]])]()}while(++S.i<t.length/3);delete S.t[S.c],S.i=0}},run(t,e,l){let c=S.c-~e-1,g=S.t[c]=[S.t[c],[]][+!S.t[c]],i=g.length;g[i]=t,g[i+1]=[l,"0"][+!l],g[i+2]=S.o++},stop(t){S.g[t]=S.o++}};tick=()=>{S.d[!S.t[S.c]],S.c++};`;
 
 const BLOCK_MAP_CODE = `S.run((()=>{globalThis.B={};let e=[${BLOCK_IDS.join(',')}],l="${CHARSET}";e.forEach(((e,t)=>{let o=l[Math.floor(t/27)]+l[t%27];B[o]=api.blockIdToBlockName(e)}))}));`;
 
