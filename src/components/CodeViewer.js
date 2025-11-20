@@ -55,7 +55,7 @@ const CodeViewer = ({ blueprint, config }) => {
             const index = BLOCK_IDS.indexOf(id);
 
             if (index === -1) {
-                encodedData.push("aa"); // Air/Unknown
+                encodedData.push(CHARSET[0].repeat(2)); // Air/Unknown
             } else {
                 const char1 = CHARSET[Math.floor(index / 27)];
                 const char2 = CHARSET[index % 27];
