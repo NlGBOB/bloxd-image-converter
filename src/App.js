@@ -22,7 +22,7 @@ function App() {
   const [config, setConfig] = useState(defaultConfig);
   const workerRef = useRef(null);
 
-  const processFile = (file) => {
+  const processFile = useCallback((file) => {
     if (!file) return;
     if (image) URL.revokeObjectURL(image);
     setImage(URL.createObjectURL(file));
@@ -31,7 +31,26 @@ function App() {
     setBlueprint(null);
     setError('');
     setComparePosition(100);
-  };
+  }, [image]);
+
+  useEffect(() => {
+    const handlePaste = (e) => {
+      if (e.clipboardData && e.clipboardData.items) {
+        const items = e.clipboardData.items;
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].type.indexOf('image') !== -1) {
+            e.preventDefault();
+            const file = items[i].getAsFile();
+            processFile(file);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('paste', handlePaste);
+    return () => window.removeEventListener('paste', handlePaste);
+  }, [processFile]);
 
   const handleConfigChange = (e) => {
     const { name, value, type, checked } = e.target;

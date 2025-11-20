@@ -618,10 +618,16 @@ select:focus {
 
 .code-snippet-container {
   margin-bottom: 1.5rem;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
 }
 
 .code-snippet-container:last-child {
   margin-bottom: 0;
+}
+
+.code-snippet-container.history-copied {
+  opacity: 0.7;
+  border-color: rgba(16, 185, 129, 0.5);
 }
 
 .code-header {
@@ -674,6 +680,11 @@ select:focus {
   padding: 0.75rem;
   overflow: hidden;
   max-width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.code-snippet-container.history-copied .code-block-wrapper {
+  background-color: #050507;
 }
 
 .code-block {
