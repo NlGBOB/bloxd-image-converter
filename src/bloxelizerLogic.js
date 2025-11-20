@@ -138,8 +138,7 @@ function findBestMatch(pixelColor, candidates) {
             bestMatch = candidate;
         }
     }
-
-    return bestMatch ? bestMatch.textureInfo : null;
+    return bestMatch;
 }
 
 async function loadImageBitmap(buffer) {
@@ -232,6 +231,14 @@ function generateBlueprintFiles(choicesGrid, texturePalette) {
     };
 }
 
+function distributeError(data, x, y, width, height, errR, errG, errB, factor) {
+    if (x < 0 || x >= width || y < 0 || y >= height) return;
+    const idx = (y * width + x) * 4;
+    data[idx] = data[idx] + errR * factor;
+    data[idx + 1] = data[idx + 1] + errG * factor;
+    data[idx + 2] = data[idx + 2] + errB * factor;
+}
+
 export async function runBloxelizer(inputFile, CONFIG, onProgress) {
     try {
         console.log('Starting bloxelization with config:', CONFIG);
@@ -318,12 +325,27 @@ export async function runBloxelizer(inputFile, CONFIG, onProgress) {
                     continue;
                 }
 
-                const bestTextureInfo = findBestMatch(pixelColor, candidates);
+                const bestMatch = findBestMatch(pixelColor, candidates);
 
-                if (bestTextureInfo) {
-                    choicesGrid[y][x] = bestTextureInfo.textureId;
-                    const textureBitmap = await getTextureImage(bestTextureInfo, CONFIG);
+                if (bestMatch) {
+                    const { textureInfo, perceivedColor } = bestMatch;
+                    choicesGrid[y][x] = textureInfo.textureId;
+                    const textureBitmap = await getTextureImage(textureInfo, CONFIG);
                     finalCtx.drawImage(textureBitmap, x * CONFIG.TEXTURE_SIZE, y * CONFIG.TEXTURE_SIZE);
+
+                    if (CONFIG.dithering > 0 && perceivedColor) {
+                        const strength = CONFIG.dithering / 100;
+
+                        const errR = (pixelColor.r - perceivedColor.r) * strength;
+                        const errG = (pixelColor.g - perceivedColor.g) * strength;
+                        const errB = (pixelColor.b - perceivedColor.b) * strength;
+
+                        distributeError(resizedPixels, x + 1, y, outputWidth, outputHeight, errR, errG, errB, 7 / 16);
+                        distributeError(resizedPixels, x - 1, y + 1, outputWidth, outputHeight, errR, errG, errB, 3 / 16);
+                        distributeError(resizedPixels, x, y + 1, outputWidth, outputHeight, errR, errG, errB, 5 / 16);
+                        distributeError(resizedPixels, x + 1, y + 1, outputWidth, outputHeight, errR, errG, errB, 1 / 16);
+                    }
+
                 } else {
                     finalCtx.fillStyle = `rgba(${pixelColor.r}, ${pixelColor.g}, ${pixelColor.b}, ${pixelColor.a / 255})`;
                     finalCtx.fillRect(x * CONFIG.TEXTURE_SIZE, y * CONFIG.TEXTURE_SIZE, CONFIG.TEXTURE_SIZE, CONFIG.TEXTURE_SIZE);

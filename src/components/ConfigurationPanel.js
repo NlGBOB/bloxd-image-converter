@@ -154,6 +154,26 @@ const ConfigurationPanel = ({ config, onConfigChange, onReset }) => {
             </div>
 
             <div className="control-item">
+                <div className="label-row">
+                    <label htmlFor="dithering">Dithering Strength</label>
+                    <span className="value-badge">{config.dithering}%</span>
+                </div>
+                <input
+                    className="slider"
+                    type="range"
+                    id="dithering"
+                    name="dithering"
+                    min="0"
+                    max="100"
+                    value={config.dithering}
+                    onChange={onConfigChange}
+                />
+                <p className="control-description">
+                    Scatters color errors to neighboring blocks. Higher values blend colors better but add noise.
+                </p>
+            </div>
+
+            <div className="control-item">
                 <label className="checkbox-label" htmlFor="allowTransparency">
                     <input
                         type="checkbox"
