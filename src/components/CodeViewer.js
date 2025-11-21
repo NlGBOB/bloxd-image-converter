@@ -64,7 +64,7 @@ const CodeViewer = ({ blueprint, config }) => {
         }
         const fullString = encodedData.join('');
         const getCodeTemplate = (dataStr, w, h, offset, logic) => {
-            return `let s="${dataStr}",w=${w},h=${h},o=${offset},[x,y,z]=thisPos;S.run(function f(i=0){let c=128;do{let I=o+i,k=s[i*2]+s[i*2+1];api.setBlock(${logic},B[k]);i++}while((--c>0)&(i*2<s.length));(i*2<s.length)&&S.run(()=>f(i),1,'b'+o)},0,'b'+o)`;
+            return `let s="${dataStr}",w=${w},h=${h},o=${offset},[x,y,z]=thisPos;S.run(function f(i){i=-~i-1;let c=256;do{if(i*2>=s.length)return;let I=o+i,k=s[i*2]+s[i*2+1];api.setBlock(${logic},B[k]);i++}while(--c>0);S.run(()=>f(i),1,'b'+o)},0,'b'+o)`;
         };
 
         const MAX_TOTAL_CHARS = 15900;
