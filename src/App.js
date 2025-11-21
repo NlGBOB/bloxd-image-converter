@@ -187,6 +187,7 @@ function App() {
               <CodeViewer
                 blueprint={blueprint}
                 config={config}
+                resultImage={resultImage}
               />
 
               <DownloadActions

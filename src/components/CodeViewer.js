@@ -2,7 +2,7 @@ import React from 'react';
 import CodeSnippet from './CodeSnippet';
 import { SETUP_CODE, BLOCK_IDS, CHARSET } from '../constants';
 
-const CodeViewer = ({ blueprint, config }) => {
+const CodeViewer = ({ blueprint, config, resultImage }) => {
     const getDynamicCode = () => {
         if (!blueprint) return [];
         const { width, height } = JSON.parse(blueprint.config);
@@ -83,7 +83,13 @@ const CodeViewer = ({ blueprint, config }) => {
 
             parts.push({
                 label: `2.${parts.length + 1} Build Part ${parts.length + 1}${currentBlockIndex + blocksToTake >= totalBlocks ? ' (Final)' : ''}`,
-                code: code
+                code: code,
+                chunkInfo: {
+                    start: currentBlockIndex,
+                    length: blocksToTake,
+                    totalWidth: width,
+                    totalHeight: height
+                }
             });
 
             currentBlockIndex += blocksToTake;
@@ -102,6 +108,7 @@ const CodeViewer = ({ blueprint, config }) => {
             <CodeSnippet
                 label="1. One-Time Setup (Replace your world code with this)"
                 code={SETUP_CODE}
+                isSetup={true}
             />
 
             {getDynamicCode().map((item, idx) => (
@@ -109,6 +116,8 @@ const CodeViewer = ({ blueprint, config }) => {
                     key={idx}
                     label={item.label}
                     code={item.code}
+                    chunkInfo={item.chunkInfo}
+                    resultImage={resultImage}
                 />
             ))}
         </div>
